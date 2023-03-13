@@ -2,7 +2,8 @@ import java.sql.Connection;
 import java.sql.DriverManager; 
 import java.sql.DatabaseMetaData; 
 import java.sql.SQLException; 
-import java.sql.Statement;  
+import java.sql.Statement;
+import java.sql.PreparedStatement;
    
 public class Database {  
   public Connection con;
@@ -68,49 +69,49 @@ public class Database {
     try{    
         Statement stmt = this.con.createStatement();  
         stmt.execute(create_table);
-        stmt.execute(addr1);
-        stmt.execute(addr2);
-        stmt.execute(addr3);
-        stmt.execute(addr4);
-        stmt.execute(addr5);
-        stmt.execute(addr6);
-        stmt.execute(addr7);
-        stmt.execute(addr8);
-        stmt.execute(addr9);
-        stmt.execute(addr10);
-        stmt.execute(addr11);
-        stmt.execute(addr12);
-        stmt.execute(addr13);
-        stmt.execute(addr14);
-        stmt.execute(addr15);
-        stmt.execute(addr16);
-        stmt.execute(addr17);
-        stmt.execute(addr18);
-        stmt.execute(addr19);
-        stmt.execute(addr20);
-        stmt.execute(addr21);
-        stmt.execute(addr22);
-        stmt.execute(addr23);
-        stmt.execute(addr24);
-        stmt.execute(addr25);
-        stmt.execute(addr26);
-        stmt.execute(addr27);
-        stmt.execute(addr28);
-        stmt.execute(addr29);
-        stmt.execute(addr30);
-        stmt.execute(addr31);
-        stmt.execute(addr32);
-        stmt.execute(addr33);
-        stmt.execute(addr34);
-        stmt.execute(addr35);
-        stmt.execute(addr36);
-        stmt.execute(addr37);
-        stmt.execute(addr38);
-        stmt.execute(addr39);
-        stmt.execute(addr40);
-        stmt.execute(addr41);
+        PreparedStatement pstmt1 = conn.prepareStatement(addr1); 
+        PreparedStatement pstmt2 = conn.prepareStatement(addr2); 
+        PreparedStatement pstmt3 = conn.prepareStatement(addr3); 
+        PreparedStatement pstmt4 = conn.prepareStatement(addr4); 
+        PreparedStatement pstmt5 = conn.prepareStatement(addr5);
+        PreparedStatement pstmt6 = conn.prepareStatement(addr6); 
+        PreparedStatement pstmt7 = conn.prepareStatement(addr7); 
+        PreparedStatement pstmt8 = conn.prepareStatement(addr8); 
+        PreparedStatement pstmt9 = conn.prepareStatement(addr9);
+        PreparedStatement pstmt10 = conn.prepareStatement(addr10); 
+        PreparedStatement pstmt11 = conn.prepareStatement(addr11); 
+        PreparedStatement pstmt12 = conn.prepareStatement(addr12); 
+        PreparedStatement pstmt13 = conn.prepareStatement(addr13);
+        PreparedStatement pstmt14 = conn.prepareStatement(addr14); 
+        PreparedStatement pstmt15 = conn.prepareStatement(addr15); 
+        PreparedStatement pstmt16 = conn.prepareStatement(addr16); 
+        PreparedStatement pstmt17 = conn.prepareStatement(addr17);
+        PreparedStatement pstmt18 = conn.prepareStatement(addr18); 
+        PreparedStatement pstmt19 = conn.prepareStatement(addr19); 
+        PreparedStatement pstmt20 = conn.prepareStatement(addr20); 
+        PreparedStatement pstmt21 = conn.prepareStatement(addr21);
+        PreparedStatement pstmt22 = conn.prepareStatement(addr22); 
+        PreparedStatement pstmt23 = conn.prepareStatement(addr23); 
+        PreparedStatement pstmt24 = conn.prepareStatement(addr24); 
+        PreparedStatement pstmt25 = conn.prepareStatement(addr25);
+        PreparedStatement pstmt26 = conn.prepareStatement(addr26); 
+        PreparedStatement pstmt27 = conn.prepareStatement(addr27); 
+        PreparedStatement pstmt28 = conn.prepareStatement(addr28); 
+        PreparedStatement pstmt29 = conn.prepareStatement(addr29);
+        PreparedStatement pstmt30 = conn.prepareStatement(addr30); 
+        PreparedStatement pstmt31 = conn.prepareStatement(addr31); 
+        PreparedStatement pstmt32 = conn.prepareStatement(addr32); 
+        PreparedStatement pstmt33 = conn.prepareStatement(addr33);
+        PreparedStatement pstmt34 = conn.prepareStatement(addr34); 
+        PreparedStatement pstmt35 = conn.prepareStatement(addr35); 
+        PreparedStatement pstmt36 = conn.prepareStatement(addr36); 
+        PreparedStatement pstmt37 = conn.prepareStatement(addr37);
+        PreparedStatement pstmt38 = conn.prepareStatement(addr38); 
+        PreparedStatement pstmt39 = conn.prepareStatement(addr39); 
+        PreparedStatement pstmt40 = conn.prepareStatement(addr40); 
+        PreparedStatement pstmt41 = conn.prepareStatement(addr41);
+        
     } catch (SQLException e) {  
         //Handle   
     }  
   }
-}
