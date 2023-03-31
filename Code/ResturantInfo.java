@@ -1,7 +1,7 @@
 public class ResturantInfo{  
 	
 	String name;
-	String speciality;
+	String specialty;
 	String location;
 	String state_zip;
 	String street;
@@ -10,13 +10,13 @@ public class ResturantInfo{
 	
 	public ResturantInfo(String n, String s, String l, String st, String sz) {
 		this.name = n;
-		this.speciality = s;
+		this.specialty = s;
 		this.location = l;
 		this.street = st;
 		this.state_zip = sz;
 	}
 	
-	public ResturantInfo[] get_resturant_array(){
+	public static ResturantInfo[] get_resturant_array(){
 		ResturantInfo c1 = new ResturantInfo("Kenya's Keto Kitchen", "Keto", "Chicago", "3101 W Lake St", "IL 60612");
 		ResturantInfo c2 = new ResturantInfo("Dirty Root", "Low Carb", "Chicago", "939 W Randolph St", "IL 60607");
 		ResturantInfo c3 = new ResturantInfo("CRAFT Donuts + Coffee", "Keto", "Des Plaines", "1501 Miner St", "IL 60016");
