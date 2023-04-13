@@ -1,5 +1,3 @@
-package com.cs440;
-
 public class ResturantInfo {
 
         String name;
