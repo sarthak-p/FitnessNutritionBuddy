@@ -1,0 +1,129 @@
+	int goal = 1000;
+	int limit = 200;
+
+	public Meal getRandomMeal(MealsInfo[] restaurants, String filter) {
+		// Filter the restaurants based on the selected filter
+		List<MealsInfo> filteredRestaurants = Arrays.stream(restaurants)
+				.filter(restaurant -> filter.equals("All") ||
+						restaurant.speciality.equals(filter))
+				.collect(Collectors.toList());
+
+		if (filteredRestaurants.isEmpty()) {
+			return null;
+		}
+
+		// Select a random restaurant from the filtered list
+		MealsInfo restaurant = filteredRestaurants.get((int) (Math.random() *
+				filteredRestaurants.size()));
+
+		// Select a random meal from the restaurant
+		Meal[] meals = { restaurant.breakfast, restaurant.lunch, restaurant.dinner };
+		Meal meal = meals[(int) (Math.random() * meals.length)];
+
+		return meal;
+	}
+
+	private void updateMealLabels(MealsInfo[] restaurants, String filter, Label breakfast, Label lunch, Label dinner) {
+		int totalCalories = 0;
+		Meal[] selectedMeals = new Meal[3];
+
+		// Select random meals until their total calories exceed `goal`
+		while (totalCalories < (goal - limit) || totalCalories > (goal + limit)) {
+			// Select a random meal for breakfast, lunch, and dinner
+			Meal breakfastMeal = getRandomMeal(restaurants, filter);
+			Meal lunchMeal = getRandomMeal(restaurants, filter);
+			Meal dinnerMeal = getRandomMeal(restaurants, filter);
+
+			// If any of the meals are null, it means there aren't enough meals for the
+			// selected filter
+			if (breakfastMeal == null || lunchMeal == null || dinnerMeal == null) {
+				break;
+			}
+
+			// Calculate the total calories of the three meals
+			totalCalories = breakfastMeal.getCalories() + lunchMeal.getCalories() +
+					dinnerMeal.getCalories();
+
+			// Save the selected meals
+			selectedMeals[0] = breakfastMeal;
+			selectedMeals[1] = lunchMeal;
+			selectedMeals[2] = dinnerMeal;
+		}
+
+		// Update the meal labels
+		if (totalCalories >= (goal - limit) && totalCalories <= (goal + limit)) {
+			breakfast.setText("Breakfast:\n" + selectedMeals[0].getDescription() + "\n" +
+					selectedMeals[0].getCalories()
+					+ " calories" + "\n" + "From Restaurant: " + "\n" +
+					selectedMeals[0].getName());
+			lunch.setText(
+					"Lunch:\n" + selectedMeals[1].getDescription() + "\n" +
+							selectedMeals[1].getCalories()
+							+ " calories" + "\n" + "From Restaurant: " + "\n" +
+							selectedMeals[1].getName());
+			dinner.setText(
+					"Dinner:\n" + selectedMeals[2].getDescription() + "\n" +
+							selectedMeals[2].getCalories()
+							+ " calories" + "\n" + "From Restaurant: " + "\n" +
+							selectedMeals[2].getName());
+		} else {
+			breakfast.setText("Not enough meal options available for the selected filter.");
+			lunch.setText("");
+			dinner.setText("");
+		}
+	}
+
+	public void mealPlanScreen(Stage primaryStage) {
+
+		MealsInfo[] restaurants = new MealsInfo().get_restaurant_array();
+
+		Text title = new Text("Meal Plan");
+		title.setFont(Font.font("Arial", 25));
+		title.setX(220);
+		title.setY(30);
+
+		Label breakfast = createLabel("Breakfast:\n", 100);
+		breakfast.setFont(Font.font("Arial", 17));
+		Label lunch = createLabel("Lunch:\n", 260);
+		lunch.setFont(Font.font("Arial", 17));
+		Label dinner = createLabel("Dinner:\n", 420);
+		dinner.setFont(Font.font("Arial", 17));
+
+		Button backButton = new Button("Back");
+		backButton.setFont(Font.font("Arial", 14));
+		backButton.setTranslateX(10);
+		backButton.setTranslateY(10);
+		backButton.setOnAction(e -> optionScreen(primaryStage));
+
+		// Filter ComboBox
+		ComboBox<String> filterOptions = new ComboBox<>();
+		filterOptions.getItems().addAll("All", "Keto", "Vegan", "Paleo", "Low Carb",
+				"Gluten Free");
+		filterOptions.setValue("All");
+		filterOptions.setTranslateX(480);
+		filterOptions.setTranslateY(50);
+		filterOptions.setStyle("-fx-font: 14px \"Arial\";");
+
+		filterOptions.setOnAction(e -> {
+			String filter = filterOptions.getValue();
+			updateMealLabels(restaurants, filter, breakfast, lunch, dinner);
+		});
+
+		String initialFilter = filterOptions.getValue();
+		updateMealLabels(restaurants, initialFilter, breakfast, lunch, dinner);
+
+		Button newPlanButton = new Button("New Plan");
+		newPlanButton.setFont(Font.font("Arial", 14));
+		newPlanButton.setTranslateX(510);
+		newPlanButton.setTranslateY(10);
+		newPlanButton.setOnAction(e -> {
+			String currentFilter = filterOptions.getValue();
+			updateMealLabels(restaurants, currentFilter, breakfast, lunch, dinner);
+		});
+		Group root = new Group(title, breakfast, lunch, dinner, backButton,
+				newPlanButton, filterOptions);
+
+		Scene scene = new Scene(root, 675, 600, Color.MINTCREAM);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
